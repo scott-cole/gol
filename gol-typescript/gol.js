@@ -7,8 +7,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-var width = 20;
-var height = 10;
+var width = 200;
+var height = 100;
 var grid = Array.from({ length: height }, function () {
     return Array.from({ length: width }, function () { return Math.random() > 0.7 ? 1 : 0; });
 });

@@ -1,5 +1,5 @@
-const width = 20
-const height = 10
+const width = 200
+const height = 100
 
 let grid: number[][] = Array.from({ length: height}, () => 
   Array.from ({ length: width}, () => Math.random() > 0.7 ? 1: 0))
