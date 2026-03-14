@@ -33,7 +33,7 @@ function step() {
 
   for(let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++){
-      const neighbours = countNeighbours(x,y)
+      const neighbours = countneighbours(x,y)
 
       if(grid[y][x] === 1){
         if(neighbours < 2 || neighbours > 3) next[y][x] = 0
