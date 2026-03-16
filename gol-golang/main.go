@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-var width = 100
-var height = 100
+var width = 50
+var height = 25
 var grid [][]int 
 
 func createGrid(width, height int) {
@@ -99,6 +99,6 @@ func main() {
 		printGrid()
 		nextGeneration()
 
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(200 * time.Millisecond)
 	}
 }
