@@ -5,11 +5,14 @@ import (
 	"math/rand"
 )
 
-width := 20
-height := 10
-grid := make([][]int, height)
+var width = 20
+var height = 10
+var grid [][]int 
 
-func createGrid() {
+func createGrid(width, height int) {
+
+	grid = make([][]int, height)
+
 	for c := 0; c < height; c++ {
 		grid[c] = make([]int, width)
 
@@ -21,7 +24,7 @@ func createGrid() {
 	}
 }
 
-func checkNeighbours(grid [][]int,x, y, width, height int) int {
+func checkNeighbours(grid [][]int, c, r, width, height int) int {
 	count := 0
 
 	for dc := -1; dc <= 1; dc++ {
@@ -42,3 +45,15 @@ func checkNeighbours(grid [][]int,x, y, width, height int) int {
 	return count;
 }
 
+func main() {
+	createGrid(width, height)
+
+	for c := 0; c < height; c++ {
+		for r := 0; r < width; r++ {
+			fmt.Print(grid[c][r], " ")
+		}
+		fmt.Println()
+	}
+
+	fmt.Println(checkNeighbours(grid, 5, 5,))
+}
