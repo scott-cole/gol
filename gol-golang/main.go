@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
 
-var width = 20
-var height = 10
+var width = 100
+var height = 100
 var grid [][]int 
 
 func createGrid(width, height int) {
@@ -29,6 +30,7 @@ func checkNeighbours(grid [][]int, c, r, width, height int) int {
 
 	for dc := -1; dc <= 1; dc++ {
 		for dr := -1; dr <= 1; dr++ {
+
 			if dr == 0 && dc == 0  {
 				continue
 			}
@@ -36,7 +38,7 @@ func checkNeighbours(grid [][]int, c, r, width, height int) int {
 			nc := c + dc
 			nr := r + dr
 
-			if nc >= 0 && nc < width && nr >= 0 && nr < height {
+			if nc >= 0 && nc < height && nr >= 0 && nr < width {
 				count += grid[nc][nr] 
 			}  
 		}
@@ -45,15 +47,58 @@ func checkNeighbours(grid [][]int, c, r, width, height int) int {
 	return count;
 }
 
-func main() {
-	createGrid(width, height)
+func nextGeneration() {
+
+	nextGrid := make([][]int, height)
+	for i := range nextGrid {
+		nextGrid[i] = make([]int, width)
+	}
 
 	for c := 0; c < height; c++ {
 		for r := 0; r < width; r++ {
-			fmt.Print(grid[c][r], " ")
+
+			neighbours := checkNeighbours(grid, c, r, width, height)
+
+			if grid[c][r] == 1 {
+				if neighbours == 2 || neighbours == 3 {
+					nextGrid[c][r] = 1
+				}
+			} else {
+				if neighbours == 3 {
+					nextGrid[c][r] = 1
+				}
+			}
+		}
+	}
+
+	grid = nextGrid
+}
+
+func printGrid() {
+	for c := 0; c < height; c++ {
+		for r := 0; r < width; r++ {
+
+			if grid[c][r] == 1 {
+				fmt.Print("X")
+			} else {
+				fmt.Print(" ")
+			}
+
 		}
 		fmt.Println()
 	}
+}
 
-	fmt.Println(checkNeighbours(grid, 5, 5,))
+func main() {
+
+	createGrid(width, height)
+
+	for {
+		fmt.Print("\033[H\033[2J") 
+
+		printGrid()
+		nextGeneration()
+
+		time.Sleep(500 * time.Millisecond)
+	}
 }
